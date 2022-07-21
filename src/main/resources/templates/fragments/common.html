@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sunny's Culinary Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+    <link th:href="@{/css/bootstrap-override.css}" rel="stylesheet" />
+    <link th:href="@{/css/custom.css}" rel="stylesheet" />
+</head>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/vegan.png}"
+                        width="30"
+                        height="30"
+                        class="d-inline-block align-top"
+                        alt="Vegan Logo"
+                />
+                Sunny's Culinary Shop
+            </a>
+
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="nav-dropdown"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            Meals
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="nav-dropdown">
+                            <li>
+                                <a class="dropdown-item" href="fruitpies.html">Starter</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="cheesecakes.html">Main</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="seasonalpies.html"
+                                >Dessert</a
+                                >
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="all-meals.html">All meals</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/subscriptions}">
+                            Subscription
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contacts}">Contact</a>
+                    </li>
+<!--                    <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">-->
+<!--                        <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"-->
+<!--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            Admin-->
+<!--                        </a>-->
+<!--                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                            <a class="dropdown-item" href="/">Action</a>-->
+<!--                            <a class="dropdown-item" href="/">Another action</a>-->
+<!--                            <div class="dropdown-divider"></div>-->
+<!--                            <a class="dropdown-item" href="/">Something else here</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+
+                    <th:block sec:authorize="!isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/users/register}">
+                            Register
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/users/login}">
+                            Login
+                        </a>
+                    </li>
+                    </th:block>
+                    <li class="nav-item " sec:authorize="isAuthenticated()">
+<!--                        <div class="form-inline my-2 my-lg-0 px-3">-->
+<!--                            <div class="text-white" >Welcome, <th:block th:authentication="name">X</th:block>!</div>-->
+                            <form th:action="@{/users/logout}" th:method="post">
+                                <input class="btn btn-link nav-link" type="submit" th:value="Logout">
+                            </form>
+<!--                        </div>-->
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div th:fragment="jumbotron" class="container-fluid jumbotron jumbotron-other py-5">
+    <div class="container">
+        <h1 class="display-3 d-none d-md-block text-white">Place your order now.</h1>
+    </div>
+</div>
+
+<div    th:fragment="carousel"
+        id="welcomeCarousel"
+        class="carousel slide carousel-fade"
+        data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button
+                type="button"
+                data-bs-target="#welcomeCarousel"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Welcome 1"
+        ></button>
+        <button
+                type="button"
+                data-bs-target="#welcomeCarousel"
+                data-bs-slide-to="1"
+                aria-label="Welcome 2"
+        ></button>
+        <button
+                type="button"
+                data-bs-target="#welcomeCarousel"
+                data-bs-slide-to="2"
+                aria-label="Welcome 3"
+        ></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item welcome-carousel-image1 active">
+            <div class="carousel-caption">
+                <h1>Welcome to Sunny's Culinary Shop</h1>
+                <p>Best vegan food there is.</p>
+            </div>
+        </div>
+        <div class="carousel-item welcome-carousel-image2">
+            <div class="carousel-caption text-start">
+                <h1>Make an order now</h1>
+                <!-- <p>You are one step closer</p> -->
+                <p>
+                    <a
+                            class="btn btn-lg btn-primary"
+                            href="allpies.html"
+                            role="button"
+                    >See all meals</a
+                    >
+                </p>
+            </div>
+        </div>
+        <div class="carousel-item welcome-carousel-image3">
+            <div class="carousel-caption text-end">
+                <h1>Register</h1>
+                <p>You get 5% off for every order!</p>
+                <p>
+                    <a
+                            class="btn btn-lg btn-primary"
+                            th:href="@{/users/register}"
+                            role="button"
+                    >Register</a
+                    >
+                </p>
+            </div>
+        </div>
+    </div>
+    <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#welcomeCarousel"
+            data-bs-slide="prev"
+    >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#welcomeCarousel"
+            data-bs-slide="next"
+    >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<div th:fragment="off-canvas" class="offcanvas-body">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Pie name</th>
+                <th>Quantity</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Total</th>
+                <th> </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <img class="mr-3 thumbnail img-fluid" width="75"
+                             src="images/products/pumpkinpiesmall.jpg" alt="pumpkin pie">
+                        <div class="media-body">
+                            <h5 class="mt-0 media-heading text-primary">Pumpkin pie</h5>
+                            <span>Status: </span><span class="text-success"><strong>In
+										Stock</strong></span>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-1 col-md-1" style="text-align: center">
+                    <input type="number" class="form-control" value="2">
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>$14.95</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>$29.90</strong></td>
+                <td class="col-sm-1 col-md-1">
+                    <button type="button" class="btn btn-danger">
+                        X
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                        <img class="mr-3 thumbnail" width="75" src="images/products/applepiesmall.jpg"
+                             alt="apple pie">
+                        <div class="media-body">
+                            <h5 class="mt-0 media-heading text-primary">Apple pie</h5>
+                            <span>Status: </span><span class="text-warning"><strong>Last
+										items</strong></span>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-sm-1 col-md-1" style="text-align: center">
+                    <input type="number" class="form-control" value="1">
+                </td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>$14.95</strong></td>
+                <td class="col-sm-1 col-md-1 text-center"><strong>$14.95</strong></td>
+                <td class="col-sm-1 col-md-1">
+                    <button type="button" class="btn btn-danger">
+                        X
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right">
+                    <h5>Subtotal</h5>
+                </td>
+                <td class="text-center">
+                    <h5><strong>$44.85</strong></h5>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right">
+                    <h5>Shipping</h5>
+                </td>
+                <td class="text-center">
+                    <h5><strong>$10.00</strong></h5>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right">
+                    <h3>Total</h3>
+                </td>
+                <td class="text-center">
+                    <h3><strong>$54.85</strong></h3>
+                </td>
+                <td></td>
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <form class="m-1">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Promo code">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-secondary">Redeem</button>
+            </div>
+        </div>
+    </form>
+    <a type="button" href="order.html" class="m-1 btn btn-success">
+        Go to order page
+    </a>
+
+    <a type="button" href="" class="m-1 btn btn-danger" >
+        Clear your shopping cart
+    </a>
+
+</div>
+
+<div th:fragment="off-canvas-table" class="row">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Pie name</th>
+            <th>Quantity</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Total</th>
+            <th> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="col-sm-8 col-md-6">
+                <div class="media">
+                    <img class="mr-3 thumbnail img-fluid" width="75"
+                         src="images/products/pumpkinpiesmall.jpg" alt="pumpkin pie">
+                    <div class="media-body">
+                        <h5 class="mt-0 media-heading text-primary">Pumpkin pie</h5>
+                        <span>Status: </span><span class="text-success"><strong>In
+										Stock</strong></span>
+                    </div>
+                </div>
+            </td>
+            <td class="col-sm-1 col-md-1" style="text-align: center">
+                <input type="number" class="form-control" value="2">
+            </td>
+            <td class="col-sm-1 col-md-1 text-center"><strong>$14.95</strong></td>
+            <td class="col-sm-1 col-md-1 text-center"><strong>$29.90</strong></td>
+            <td class="col-sm-1 col-md-1">
+                <button type="button" class="btn btn-danger">
+                    X
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-sm-8 col-md-6">
+                <div class="media">
+                    <img class="mr-3 thumbnail" width="75" src="images/products/applepiesmall.jpg"
+                         alt="apple pie">
+                    <div class="media-body">
+                        <h5 class="mt-0 media-heading text-primary">Apple pie</h5>
+                        <span>Status: </span><span class="text-warning"><strong>Last
+										items</strong></span>
+                    </div>
+                </div>
+            </td>
+            <td class="col-sm-1 col-md-1" style="text-align: center">
+                <input type="number" class="form-control" value="1">
+            </td>
+            <td class="col-sm-1 col-md-1 text-center"><strong>$14.95</strong></td>
+            <td class="col-sm-1 col-md-1 text-center"><strong>$14.95</strong></td>
+            <td class="col-sm-1 col-md-1">
+                <button type="button" class="btn btn-danger">
+                    X
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-right">
+                <h5>Subtotal</h5>
+            </td>
+            <td class="text-center">
+                <h5><strong>$44.85</strong></h5>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-right">
+                <h5>Shipping</h5>
+            </td>
+            <td class="text-center">
+                <h5><strong>$10.00</strong></h5>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-right">
+                <h3>Total</h3>
+            </td>
+            <td class="text-center">
+                <h3><strong>$54.85</strong></h3>
+            </td>
+            <td></td>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+</html>
+
+
