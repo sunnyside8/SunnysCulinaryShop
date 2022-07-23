@@ -76,17 +76,22 @@ INSERT INTO allergens (id, allergen, picture)
 VALUES (6, 'Sesame', 'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658575330/Sesame_hcvhzb.jpg');
 
 #meals
-INSERT INTO meals (id, meal_type,name,price,photo)
-VALUES (1, 'Main', 'Curry with TVP', 8.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/Beef-TVP_hqmmc2.jpg');
+INSERT INTO meals (id, meal_type,name,price,photo,description)
+VALUES (1, 'Main', 'Curry with TVP', 8.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/Beef-TVP_hqmmc2.jpg',
+        'Ditch the meat and pack lots of veggies into a range of vibrant, plant-based curry dishes from fragrant and chunky chickpea dhals to spicy potato one-pots.');
 
-INSERT INTO meals (id, meal_type,name,price,photo)
-VALUES (2, 'Starter', 'Hummus', 5.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/Hummus_03_jy1qdl.jpg');
+INSERT INTO meals (id, meal_type,name,price,photo,description)
+VALUES (2, 'Starter', 'Hummus', 5.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/Hummus_03_jy1qdl.jpg',
+        '
+Hummus is one of our favorite dips - not only does it taste great, but it''s one of a select few nutrient-dense dips that''s good for you, too. ');
 
-INSERT INTO meals (id, meal_type,name,price,photo)
-VALUES (3, 'Main', 'Burger', 9.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/download_2_irf5no.jpg');
+INSERT INTO meals (id, meal_type,name,price,photo,description)
+VALUES (3, 'Main', 'Burger', 9.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/download_2_irf5no.jpg',
+'This flavourful vegan sweet potato burger recipe is packed with delicious spices and is ready to eat in just 30 minutes! Topped with avocado, vegan mayo, red onion, and spicy Kimchi, they are the perfect combination of savoury and spicy.');
 
-INSERT INTO meals (id, meal_type,name,price,photo)
-VALUES (4, 'Dessert', 'Cake', 5.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/134705_iipxid.jpg');
+INSERT INTO meals (id, meal_type,name,price,photo,description)
+VALUES (4, 'Dessert', 'Cake', 5.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/134705_iipxid.jpg',
+'This indulgent, fudgy vegan cake is topped with a rich frosting – you''d never guess that it''s gluten-free and made without dairy, eggs, wheat or nuts');
 
 #meals_allergens
 INSERT INTO meals_allergens (meal_id,allergens_id)

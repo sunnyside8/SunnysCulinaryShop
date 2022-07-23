@@ -29,6 +29,9 @@ public class Meal extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Ingredient> ingredients;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
     @Lob
     private String photo;
 
@@ -101,5 +104,14 @@ public class Meal extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(name, price, mealType);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Meal setDescription(String description) {
+        this.description = description;
+        return this;
     }
 }

@@ -17,6 +17,7 @@ public class MealFullViewModel {
     private Set<Allergen> allergens;
     private Set<Ingredient> ingredients;
     private String photo;
+    private String description;
 
 
     public Long getId() {
@@ -79,6 +80,15 @@ public class MealFullViewModel {
 
     public MealFullViewModel setPhoto(String photo) {
         this.photo = photo;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public MealFullViewModel setDescription(String description) {
+        this.description = description;
         return this;
     }
 }
