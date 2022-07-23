@@ -16,14 +16,14 @@ INSERT INTO addresses (id, address,area_city, town)
 VALUES (3,'yl.Studenski bl.1 et.1 ap.4' , 'Sofia',  'Sofia');
 
 #users
-INSERT INTO users (id, age, email, full_name, password, username, address_id)
-VALUES (1, 27, 'stanislava@gmail.com', 'Stanislava Oncheva', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'sunny', 1);
+INSERT INTO users (id, email, full_name, password, username, address_id)
+VALUES (1, 'stanislava@gmail.com', 'Stanislava Oncheva', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'sunny', 1);
 
-INSERT INTO users (id, age, email, full_name, password, username, address_id)
-VALUES (2, 48, 'svetlin@gmail.com','Svetlin Kolev', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'perro',2);
+INSERT INTO users (id, email, full_name, password, username, address_id)
+VALUES (2,  'svetlin@gmail.com','Svetlin Kolev', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'perro',2);
 
-INSERT INTO users (id, age, email, full_name, password, username,address_id)
-VALUES (3, 25, 'kristina@gmail.com','Kristina Oncheva', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'kristinka',3);
+INSERT INTO users (id, email, full_name, password, username,address_id)
+VALUES (3, 'kristina@gmail.com','Kristina Oncheva', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'kristinka',3);
 
 #ingredients
 INSERT INTO ingredients (id, is_organic, name)
@@ -57,20 +57,23 @@ INSERT INTO ingredients (id, is_organic, name)
 VALUES (10, false, 'Fruit');
 
 #allergens
-INSERT INTO allergens (id, allergen)
-VALUES (1, 'Gluten');
+INSERT INTO allergens (id, allergen, picture)
+VALUES (1, 'Gluten', 'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658575330/Gluten_wyjqcb.jpg');
 
-INSERT INTO allergens (id, allergen)
-VALUES (2, 'Peanuts');
+INSERT INTO allergens (id, allergen, picture)
+VALUES (2, 'Peanuts', 'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658575330/Peanuts_gnxajv.jpg');
 
-INSERT INTO allergens (id, allergen)
-VALUES (3, 'Soybeans');
+INSERT INTO allergens (id, allergen, picture)
+VALUES (3, 'Soybeans', 'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658575330/Soya_fwu8qu.jpg');
 
-INSERT INTO allergens (id, allergen)
-VALUES (4, 'Nuts');
+INSERT INTO allergens (id, allergen, picture)
+VALUES (4, 'Nuts', 'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658575330/Nuts_lotj5e.jpg');
 
-INSERT INTO allergens (id, allergen)
-VALUES (5, 'Mustard');
+INSERT INTO allergens (id, allergen, picture)
+VALUES (5, 'Mustard', 'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658575330/Mustard_mmebaa.jpg');
+
+INSERT INTO allergens (id, allergen, picture)
+VALUES (6, 'Sesame', 'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658575330/Sesame_hcvhzb.jpg');
 
 #meals
 INSERT INTO meals (id, meal_type,name,price,photo)
@@ -93,10 +96,16 @@ INSERT INTO meals_allergens (meal_id,allergens_id)
 VALUES (2, 4);
 
 INSERT INTO meals_allergens (meal_id,allergens_id)
+VALUES (2, 5);
+
+INSERT INTO meals_allergens (meal_id,allergens_id)
 VALUES (3, 1);
 
 INSERT INTO meals_allergens (meal_id,allergens_id)
 VALUES (3, 3);
+
+INSERT INTO meals_allergens (meal_id,allergens_id)
+VALUES (3, 5);
 
 INSERT INTO meals_allergens (meal_id,allergens_id)
 VALUES (4, 4);

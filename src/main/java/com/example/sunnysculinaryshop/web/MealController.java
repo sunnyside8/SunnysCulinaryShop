@@ -31,8 +31,7 @@ public class MealController {
 
     @GetMapping("/{id}")
     public String mealPage(@PathVariable Long id, Model model){
-//        model.addAttribute();
-//        System.out.println();
+        model.addAttribute("meal",mealService.getMealById(id));
         return "meal-page";
     }
 }

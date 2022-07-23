@@ -14,4 +14,6 @@ public interface MealRepository extends JpaRepository<Meal,Long> {
     Meal getMealById(Long id);
 
     List<Meal> getAllByMealType(MealTypeEnum mealType);
+
+
 }

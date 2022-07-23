@@ -3,6 +3,7 @@ package com.example.sunnysculinaryshop.service;
 import com.example.sunnysculinaryshop.model.entity.Meal;
 import com.example.sunnysculinaryshop.model.entity.enums.MealTypeEnum;
 import com.example.sunnysculinaryshop.model.service.MealCardModel;
+import com.example.sunnysculinaryshop.model.service.MealFullViewModel;
 import com.example.sunnysculinaryshop.repository.MealRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,11 @@ public class MealService {
         return mealRepository.getAllByMealType(mealTypeEnum).stream()
                 .map(meal -> modelMapper.map(meal, MealCardModel.class))
                 .collect(Collectors.toList());
+    }
+
+
+    public MealFullViewModel getMealById(Long id) {
+        MealFullViewModel mealFullViewModel = modelMapper.map(mealRepository.getMealById(id),MealFullViewModel.class);
+        return mealFullViewModel;
     }
 }

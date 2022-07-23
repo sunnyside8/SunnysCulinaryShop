@@ -68,7 +68,7 @@
                 <p class="card-text" >Order today!</p>
               </div>
               <div class="card-footer">
-                <a href="applepie.html" class="btn btn-primary">View details</a>
+                <a th:href="@{/meals/{id}(id= ${m.getId()})}" class="btn btn-primary">View details</a>
               </div>
             </div>
           </div>
