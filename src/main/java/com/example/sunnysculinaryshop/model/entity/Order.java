@@ -11,7 +11,7 @@ public class Order extends BaseEntity {
     @ManyToMany
     private List<Meal> meals;
 
-    @ManyToOne
+    @OneToOne
     private User user;
 
     private BigDecimal sum;

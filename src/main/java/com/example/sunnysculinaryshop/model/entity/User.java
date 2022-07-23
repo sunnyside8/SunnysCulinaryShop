@@ -18,12 +18,13 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String email;
 
+    @OneToOne
+    private Order order;
+
     private SubscriptionEnum subscription;
 
     @OneToOne
     private Address address;
-
-    private int age;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -73,10 +74,6 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public SubscriptionEnum getSubscription() {
         return subscription;
     }
@@ -95,23 +92,25 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public User setAge(int age) {
-        this.age = age;
-        return this;
+    public Order getOrder() {
+        return order;
     }
 
-
+    public User setOrder(Order order) {
+        this.order = order;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(fullName, user.fullName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(age, user.age);
+        return Objects.equals(fullName, user.fullName) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fullName, username, password, email, age);
+        return Objects.hash(fullName, username, password, email);
     }
 }

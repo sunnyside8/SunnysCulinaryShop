@@ -1,5 +1,7 @@
 package com.example.sunnysculinaryshop.model.binding;
 
+import com.example.sunnysculinaryshop.model.validation.UniqueUserEmail;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,6 +13,7 @@ public class UserRegisterBindingModel {
     private String username;
 
     @Email
+    @UniqueUserEmail(message = "Email should be unique")
     private String email;
 
     @NotBlank
