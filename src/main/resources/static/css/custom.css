@@ -48,27 +48,24 @@ body {
   width: 500px;
 }
 
-.jumbotron-cheese-cakes {
-  background: url("../images/products/cheesecake.jpg") no-repeat fixed;
+.jumbotron-desserts{
+  background: url("../images/IMG_15773 (2).jpg") no-repeat fixed;
 }
 
-.jumbotron-all-pies {
+.jumbotron-starters{
+  background: url("../images/starters (2).jpg") no-repeat fixed;
+}
+
+.jumbotron-all {
   background: url("../images/all-vegan.jpg") no-repeat fixed;
 }
 
-.jumbotron-fruit-pies {
-  background: url("../images/products/strawberrypie.jpg") no-repeat fixed;
-}
-
-.jumbotron-seasonal-pies {
-  background: url("../images/products/cranberrypie.jpg") no-repeat fixed;
-}
 
 .jumbotron-other {
   background: url("..images/vegan-food-in-Bali.jpg") no-repeat fixed;
 }
 
-.jumbotron-detail-apple-pie {
+.jumbotron-detail-apple-meal {
   background: url("../images/vegan-food-spread-Casinosa-Photo-Getty-Images.jpg") no-repeat fixed;
 }
 

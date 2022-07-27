@@ -55,4 +55,6 @@ public class UserServiceModel {
         this.fullName = fullName;
         return this;
     }
+
+
 }

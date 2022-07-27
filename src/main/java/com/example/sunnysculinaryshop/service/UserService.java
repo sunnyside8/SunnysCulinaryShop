@@ -2,6 +2,7 @@ package com.example.sunnysculinaryshop.service;
 
 import com.example.sunnysculinaryshop.model.binding.UserRegisterBindingModel;
 import com.example.sunnysculinaryshop.model.entity.Address;
+import com.example.sunnysculinaryshop.model.entity.Order;
 import com.example.sunnysculinaryshop.model.entity.Role;
 import com.example.sunnysculinaryshop.model.entity.User;
 import com.example.sunnysculinaryshop.model.entity.enums.RolesNameEnum;
@@ -28,7 +29,7 @@ public class UserService {
     private final RoleRepository repository;
     private final UserDetailsService userDetailsService;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleRepository repository, UserDetailsService userDetailsService) {
+    public UserService(UserRepository userRepository, OrderService orderService, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleRepository repository, UserDetailsService userDetailsService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
@@ -50,7 +51,11 @@ public class UserService {
     }
 
     public UserServiceModel findByUsername(String username) {
-        return modelMapper.map(this.userRepository.findByUsername(username).orElse(null), UserServiceModel.class);
+        return modelMapper.map(getUserByUsername(username), UserServiceModel.class);
+    }
+
+    public User getUserByUsername(String username){
+        return  this.userRepository.findByUsername(username).orElse(null);
     }
 
 
@@ -68,6 +73,14 @@ public class UserService {
         SecurityContextHolder.
                 getContext().
                 setAuthentication(auth);
+    }
+
+    public void clearCartByUserUsername(String username) {
+        userRepository.findByUsername(username).get().setOrder(new Order());
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
     }
 }
 

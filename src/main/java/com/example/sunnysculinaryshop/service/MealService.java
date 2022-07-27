@@ -50,9 +50,12 @@ public class MealService {
                 .collect(Collectors.toList());
     }
 
+    public Meal getMealById(Long id){
+        return mealRepository.getMealById(id);
+    }
 
-    public MealFullViewModel getMealById(Long id) {
-        MealFullViewModel mealFullViewModel = modelMapper.map(mealRepository.getMealById(id),MealFullViewModel.class);
+    public MealFullViewModel getMealFullViewById(Long id) {
+        MealFullViewModel mealFullViewModel = modelMapper.map(getMealById(id),MealFullViewModel.class);
         return mealFullViewModel;
     }
 }

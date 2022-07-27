@@ -18,12 +18,12 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String email;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Order order;
 
     private SubscriptionEnum subscription;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Address address;
 
     @ManyToMany(fetch = FetchType.EAGER)

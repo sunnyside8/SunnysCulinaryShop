@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "orders")
 public class Order extends BaseEntity {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Meal> meals;
 
     @OneToOne
@@ -44,6 +44,10 @@ public class Order extends BaseEntity {
         return this.meals.stream().map(Meal::getPrice)
                 .map(BigDecimal::intValue).
                 reduce(0, Integer::sum);
+    }
+
+    public void addMealToOrder(Meal meal){
+        this.getMeals().add(meal);
     }
 
 }
