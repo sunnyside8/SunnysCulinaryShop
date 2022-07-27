@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head th:replace="fragments/common::head"></head>
+
+<body>
+<header th:replace="fragments/common::header"></header>
+    <main role="main">
+      <div class="container-fluid jumbotron jumbotron-starters py-5">
+        <div class="container">
+          <h1 class="display-3 fw-bold text-white">Let's start tasty</h1>
+        </div>
+      </div>
+      <div class="container">
+        <nav class="my-3 ms-3" style="--bs-breadcrumb-divider: '>'">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/meals/all}">All Meals</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Starters
+            </li>
+          </ol>
+        </nav>
+        <div class="row">
+          <div class="col-md-4" th:each="m : ${starters}" th:object="${m}">
+            <div class="card rounded mb-4 shadow-sm">
+              <img
+                class="card-img-top"
+                width="175" height="175"
+                th:src="${m.getPhoto()}"
+              />
+              <div class="card-body">
+                <h5 class="card-title" th:text="${m.getName()}" >Name</h5>
+                <p class="card-text" th:text="${m.getPrice()}  + ' BGN' " >Price</p>
+              </div>
+              <div class="card-footer">
+                <a th:href="@{/meals/{id}(id=${m.getId()})}" class="btn btn-primary">View details</a>
+              </div>
+            </div>
+          </div>
+          </div>
+
+      </div>
+    </main>
+
+  </body>
+</html>
