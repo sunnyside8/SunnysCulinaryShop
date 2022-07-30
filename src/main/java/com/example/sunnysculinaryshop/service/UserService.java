@@ -106,5 +106,13 @@ public class UserService {
     }
 
 
+    public void removeMealFromUser(Meal meal, String username) {
+        User user = userRepository.findByUsername(username).get();
+        List<Meal> order = user.getOrder();
+        order.remove(meal);
+        user.setOrder(order);
+        userRepository.save(user);
+
+    }
 }
 

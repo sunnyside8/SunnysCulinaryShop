@@ -70,4 +70,6 @@ public class MealController {
         model.addAttribute("mains", mealService.getAllMealsByType(MealTypeEnum.Main));
         return "mains";
     }
+
+
 }

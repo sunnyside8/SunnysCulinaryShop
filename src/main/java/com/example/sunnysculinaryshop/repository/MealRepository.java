@@ -18,10 +18,5 @@ public interface MealRepository extends JpaRepository<Meal,Long> {
 
     List<Meal> getAllByMealType(MealTypeEnum mealType);
 
-    List<Meal> getAllBy();
-
-//    @Query("SELECT Meal.user FROM Meal WHERE Meal.user IN :user")
-//    List<Meal> getMealByUser_Id(User user);
-
 
 }

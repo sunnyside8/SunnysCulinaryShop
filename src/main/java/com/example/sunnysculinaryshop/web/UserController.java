@@ -14,10 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -75,20 +72,7 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/order")
-    public String order(Model model,@AuthenticationPrincipal ShopUserDetails userDetails){
-        List<Meal> mealsByUser = userService.getAllMealsByUser(userDetails.getUsername());
-        model.addAttribute("order",mealsByUser);
-        model.addAttribute("totalPrice",mealsByUser.stream().map(Meal::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
-        return "order";
-    }
 
-
-    @GetMapping("/clear-cart")
-    public String clearCart(@AuthenticationPrincipal ShopUserDetails userDetails) {
-        userService.clearCartByUserUsername(userDetails.getUsername());
-        return "redirect:/";
-    }
 
 
     @ModelAttribute
