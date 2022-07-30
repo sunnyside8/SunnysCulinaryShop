@@ -1,37 +1,41 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head th:replace="fragments/common::head"></head>
 
 <body>
 <header th:replace="fragments/common::header"></header>
+
     <main role="main">
-      <div class="container-fluid jumbotron jumbotron-starters py-5">
+      <div class="container-fluid jumbotron jumbotron-all-pies py-5">
         <div class="container">
-          <h1 class="display-3 fw-bold text-white">Let's start tasty</h1>
+          <h1 class="display-3 fw-bold text-white">The starters</h1>
         </div>
       </div>
+
       <div class="container">
-        <nav class="my-3 ms-3" style="--bs-breadcrumb-divider: '>'">
+        <nav
+          aria-label="breadcrumb"
+          style="--bs-breadcrumb-divider: '>'"
+          class="my-3 ms-3"
+        >
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a th:href="@{/meals/all}">All Meals</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Starters
-            </li>
+            <li class="breadcrumb-item active" aria-current="page">Mains</li>
           </ol>
         </nav>
-        <div class="row">
-          <div class="col-md-4" th:each="m : ${starters}" th:object="${m}">
-            <div class="card rounded mb-4 shadow-sm">
+
+        <div class="row" data-masonry='{"percentPosition": true }' >
+          <div th:each="m : ${starters}" th:object="${m}">
+          <div class="col-sm-6 col-lg-4 mb-4" >
+            <div class="card">
               <img
                 class="card-img-top"
-                width="175" height="175"
                 th:src="${m.getPhoto()}"
               />
               <div class="card-body">
-                <h5 class="card-title" th:text="${m.getName()}" >Name</h5>
-                <p class="card-text" th:text="${m.getPrice()}  + ' BGN' " >Price</p>
+                <h5 class="card-title" th:text="${m.getName()}">Name</h5>
+                <p class="card-text" th:text="${m.getPrice()}  + ' BGN' ">Price</p>
               </div>
               <div class="card-footer">
                 <a th:href="@{/meals/{id}(id=${m.getId()})}" class="btn btn-primary">View details</a>
@@ -39,7 +43,7 @@
             </div>
           </div>
           </div>
-
+        </div>
       </div>
     </main>
 <script
