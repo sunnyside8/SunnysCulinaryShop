@@ -35,6 +35,9 @@ public class Meal extends BaseEntity {
     @Lob
     private String photo;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    Set<User> user;
+
     public Meal() {
     }
 
@@ -112,6 +115,15 @@ public class Meal extends BaseEntity {
 
     public Meal setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public Meal setUser(Set<User> user) {
+        this.user = user;
         return this;
     }
 }

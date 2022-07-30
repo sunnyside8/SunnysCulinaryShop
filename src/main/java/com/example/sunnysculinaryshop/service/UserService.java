@@ -2,7 +2,7 @@ package com.example.sunnysculinaryshop.service;
 
 import com.example.sunnysculinaryshop.model.binding.UserRegisterBindingModel;
 import com.example.sunnysculinaryshop.model.entity.Address;
-import com.example.sunnysculinaryshop.model.entity.Order;
+import com.example.sunnysculinaryshop.model.entity.Meal;
 import com.example.sunnysculinaryshop.model.entity.Role;
 import com.example.sunnysculinaryshop.model.entity.User;
 import com.example.sunnysculinaryshop.model.entity.enums.RolesNameEnum;
@@ -18,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -28,13 +30,15 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository repository;
     private final UserDetailsService userDetailsService;
+    private final MealService mealService;
 
-    public UserService(UserRepository userRepository, OrderService orderService, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleRepository repository, UserDetailsService userDetailsService) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleRepository repository, UserDetailsService userDetailsService, MealService mealService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.repository = repository;
         this.userDetailsService = userDetailsService;
+        this.mealService = mealService;
     }
 
 
@@ -76,11 +80,31 @@ public class UserService {
     }
 
     public void clearCartByUserUsername(String username) {
-        userRepository.findByUsername(username).get().setOrder(new Order());
+        User user = userRepository.findByUsername(username).get().setOrder(new ArrayList<>());
+        userRepository.save(user);
     }
 
     public void save(User user) {
         userRepository.save(user);
     }
+
+    public void addMealToUser(Long id, String username) {
+        User user = this.userRepository.findByUsername(username).get();
+        List<Meal> order = user.getOrder();
+
+        order.add(this.mealService.getMealById(id));
+
+        user.setOrder(order);
+        userRepository.save(user);
+
+
+    }
+
+
+    public List<Meal> getAllMealsByUser(String username) {
+        return userRepository.findByUsername(username).get().getOrder();
+    }
+
+
 }
 

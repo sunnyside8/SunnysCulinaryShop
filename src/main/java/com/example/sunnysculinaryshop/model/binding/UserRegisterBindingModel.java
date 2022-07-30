@@ -24,6 +24,10 @@ public class UserRegisterBindingModel {
     @Size(min = 3,max = 20)
     private String fullName;
 
+    @NotBlank
+    @Size(min = 3,max =20)
+    private String confirmPassword;
+
     public UserRegisterBindingModel() {
     }
 
@@ -60,5 +64,14 @@ public class UserRegisterBindingModel {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public UserRegisterBindingModel setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+        return this;
     }
 }

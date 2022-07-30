@@ -3,6 +3,7 @@ package com.example.sunnysculinaryshop.model.entity;
 import com.example.sunnysculinaryshop.model.entity.enums.SubscriptionEnum;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,8 +19,8 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String email;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private Order order;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Meal> order;
 
     private SubscriptionEnum subscription;
 
@@ -92,11 +93,11 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public Order getOrder() {
+    public List<Meal> getOrder() {
         return order;
     }
 
-    public User setOrder(Order order) {
+    public User setOrder(List<Meal> order) {
         this.order = order;
         return this;
     }

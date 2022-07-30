@@ -20,7 +20,7 @@
         <nav class="my-3 ms-3" style="--bs-breadcrumb-divider: '>';">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Order</li>
+                <li class="breadcrumb-item active" aria-current="page">Register</li>
             </ol>
         </nav>
         <div class="p-2 text-center">
@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-7 col-lg-8">
             <form th:action="@{/users/register}"
-                  th:method="POST" th:object="${userRegisterBindingModel}" >
+                  th:method="POST" th:object="${userRegisterBindingModel}">
                 <h4 class="mb-3">Your Details</h4>
                 <div>
                     <div class="col-auto">
@@ -36,112 +36,153 @@
                     </div>
                     <div class="col-auto">
                         <input th:field="*{fullName}"
-                               th:errorclass="'is-invalid bg-danger'"
-                               required minlength="3" maxlength="20"
+                               required minlength="5" maxlength="20"
                                type="text"
                                id="inputFullName"
                                class="form-control"
                                aria-describedby="fullNameHelpInline">
-                        <small id="fullNameHelpInline"
-                               class="invalid-feedback bg-danger text-light rounded">
-                            Username length must be between 5 and 20 characters.
+                        <small id="fullNameError"
+                               class="invalid-feedback  form-text bg-danger rounded">Full name length must be more than
+                            3 characters</small>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputUsername" class="col-form-label ">Username</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{username}"
+                               required minlength="5" maxlength="20"
+                               type="text"
+                               id="inputUsername"
+                               class="form-control"
+                               aria-describedby="usernameHelpInline">
+                        <small id="usernameError"
+                               class="invalid-feedback bg-danger rounded">Username length must be more than 3
+                            characters</small>
+
+                        <small th:if="${false}" id="usernameUniqueError"
+                               class=" bg-danger rounded">Username is already occupied</small>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputEmail" class="col-form-label ">Email</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{email}"
+                               required
+                               type="email"
+                               id="inputEmail"
+                               class="form-control"
+                               aria-describedby="emailHelpInline">
+                        <small id="emailError"
+                               class="invalid-feedback  form-text bg-danger rounded">Must be valid email</small>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="col-auto">
+                        <label for="inputPassword" class="col-form-label ">Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{password}"
+                               required minlength="5" maxlength="20"
+                               type="password"
+                               id="inputPassword"
+                               class="form-control"
+                               aria-describedby="passwordHelpInline">
+                        <small id="passwordError"
+                               class="invalid-feedback  form-text bg-danger rounded">
+                            Password length must be between 5 and 20 characters and passwords should match.
                         </small>
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <label for="username" class="form-label">Username</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text">@</span>
-                        <input th:field="*{username}"
-                               type="text"
+                <div>
+                    <div class="col-auto">
+                        <label for="inputConfirmPassword" class="col-form-label ">Confirm Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:field="*{confirmPassword}"
+                               required minlength="5" maxlength="20"
+                               type="password"
+                               id="inputConfirmPassword"
                                class="form-control"
-                               id="username"
-                               required minlength="3" maxlength="20"
-                               placeholder="Username">
-                        <small id="usernameError"
-                               class="invalid-feedback  form-text bg-danger rounded">Username's length must be more
-                            than 3 characters</small>
+                               aria-describedby="confirmPasswordHelpInline">
+                        <small id="confirmPasswordError"
+                               class="invalid-feedback  form-text bg-danger rounded">
+                            Password length must be between 5 and 20 characters and passwords should match.
+                        </small>
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <label for="email" class="form-label">Email</label>
-                    <input th:field="*{email}"
-                           type="email"
-                           class="form-control"
-                           id="email"
-                           placeholder="you@example.com"
-                    required>
-                    <small id="emailError"
-                           class="invalid-feedback  form-text bg-danger rounded">Email must be valid</small>
-                </div>
-
-                <div class="col-12">
-                    <label for="password" class="form-label">Password</label>
-                    <input th:field="*{password}"
-                           type="password"
-                           class="form-control"
-                           id="password"
-                           required minlength="3" maxlength="20"
-                           placeholder="Password">
-                    <small id="passwordError"
-                           class="invalid-feedback  form-text bg-danger rounded">Password must be valid</small>
-                </div>
                 <div th:object="${addressBindingModel}">
-                <div class="col-12">
-                    <label for="address" class="form-label">Address</label>
-                    <input th:field="*{address}"
-                           type="text" class="form-control" id="address" placeholder="1234 Main St"
-                           >
-                    <small id="addressError"
-                           class="invalid-feedback  form-text bg-danger rounded">Address must be valid</small>
-                </div>
-
-                <div class="col">
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="areaCity" class="form-label">Area City</label>
-                            <select class="form-select" id="areaCity" th:field="*{areaCity}" required>
-                                <option value="">Choose...</option>
-                                <option value="Sofia">Sofia</option>
-                                <option value="Plovdiv">Plovdiv</option>
-                                <option value="Varna">Varna</option>
-                                <option value="Burgas">Burgas</option>
-                                <option value="Ruse">Ruse</option>
-                                <option value="Pleven">Pleven</option>
-                                <option value="Sliven">Sliven</option>
-                            </select>
-                            <small id="cityAreaError"
-                                   class="invalid-feedback  form-text bg-danger rounded">City area must be
-                                valid</small>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="inputAddress" class="col-form-label ">Address</label>
                         </div>
-                        <div class="col-auto align-self-end">
+                        <div class="form-group">
+                    <textarea th:field="*{address}"
+                              th:errorclass="'is-invalid bg-danger'"
+                              required minlength="5"
+                              id="inputAddress"
+                              class="form-control"
+                              aria-describedby="inputAddressError"></textarea>
+                            <small id="inputAddressError"
+                                   class="invalid-feedback  form-text bg-danger rounded">Address length must be more
+                                than 5
+                                characters</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col">
+                                <label for="city" class="form-label">City</label>
+                                <select th:field="*{areaCity}"
+                                        th:errorclass="'is-invalid bg-danger'"
+                                        id="city" class="form-select">
+                                    <option value="" selected>Select city</option>
+                                    <option th:each="l : ${T(com.example.sunnysculinaryshop.model.entity.enums.AreaCityEn).values()}"
+                                            th:value="${l}" th:text="${l}">Select city
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-auto align-self-end">
                                         <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                                               data-bs-trigger="hover focus"
                                               data-bs-content="If your area's city isn't listed here, we're currently not shipping to your area. Contact us via the contact form and we'll see how we can help you.">
                                             <i class="bi bi-info-circle text-primary" role="img" aria-label="Info"
                                                style="font-size: 1.5rem;"></i>
                                         </span>
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <div class="col-auto">
+                                <label for="inputTown" class="col-form-label ">Town</label>
+                            </div>
+                            <div class="col-auto">
+                                <input th:field="*{town}"
+                                       required minlength="5" maxlength="20"
+                                       type="text"
+                                       id="inputTown"
+                                       class="form-control"
+                                       aria-describedby="townHelpInline">
+                                <small id="townError"
+                                       class="invalid-feedback  form-text bg-danger rounded">Town length must be more than 3 characters</small>
+                            </div>
                         </div>
                     </div>
-
-                </div>
-
-                <div class="col-6">
-                    <label for="town" class="form-label">Town</label>
-                    <div class="input-group has-validation">
-                        <input th:field="*{town}" type="text" class="form-control" id="town" placeholder="town"
-                               required minlength="3" maxlength="20">
-                        <small id="townError"
-                               class="invalid-feedback  form-text bg-danger rounded">Postal code area must be
-                            valid</small>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button class="btn btn-primary btn-block w-50" type="submit">Register</button>
                     </div>
-                </div>
-                </div>
-                <div class="d-flex justify-content-center mt-4">
-                    <button class="btn btn-primary btn-block w-50" type="submit">Register</button>
-                </div>
             </form>
         </div>
     </div>

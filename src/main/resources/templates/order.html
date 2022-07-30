@@ -30,7 +30,7 @@
             <table class="table  table-bordered table-hover"  style="background-color: white">
                 <thead>
                 <tr>
-                    <th>Pie name</th>
+                    <th>Meal name</th>
                     <th>Quantity</th>
                     <th class="text-center">Price</th>
                     <th class="text-center">Total</th>
@@ -38,7 +38,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="m : ${basket.keySet()}" th:object="${m}" >
+                <tr th:each="m : ${order}" th:object="${m}" >
                     <td class="col-sm-8 col-md-6">
                         <div class="media">
                             <img class="mr-3 thumbnail img-fluid" width="75"

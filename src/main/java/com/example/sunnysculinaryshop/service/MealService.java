@@ -1,6 +1,7 @@
 package com.example.sunnysculinaryshop.service;
 
 import com.example.sunnysculinaryshop.model.entity.Meal;
+import com.example.sunnysculinaryshop.model.entity.User;
 import com.example.sunnysculinaryshop.model.entity.enums.MealTypeEnum;
 import com.example.sunnysculinaryshop.model.service.MealCardModel;
 import com.example.sunnysculinaryshop.model.service.MealFullViewModel;
@@ -35,7 +36,7 @@ public class MealService {
         while (randomMeals.size() < 3) {
             long randomIndex = rand.nextLong(capacityOfTheRepository);
             Meal mealById = mealRepository.getMealById(randomIndex);
-            if(mealById == null){
+            if (mealById == null) {
                 continue;
             }
             randomMeals.add(mealById);
@@ -50,12 +51,14 @@ public class MealService {
                 .collect(Collectors.toList());
     }
 
-    public Meal getMealById(Long id){
+    public Meal getMealById(Long id) {
         return mealRepository.getMealById(id);
     }
 
     public MealFullViewModel getMealFullViewById(Long id) {
-        MealFullViewModel mealFullViewModel = modelMapper.map(getMealById(id),MealFullViewModel.class);
+        MealFullViewModel mealFullViewModel = modelMapper.map(getMealById(id), MealFullViewModel.class);
         return mealFullViewModel;
     }
+
+
 }
