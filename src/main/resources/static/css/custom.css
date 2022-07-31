@@ -74,3 +74,15 @@ body {
   height: 40vh;
   background-size: cover;
 }
+
+/*input:valid{*/
+/*  border: lawngreen solid 2px;*/
+/*}*/
+
+/*input:invalid{*/
+/*  border: red;*/
+/*}*/
+
+/*input:invalid:required{*/
+/*  background-image: linear-gradient(to right, rgba(165, 147, 194, 0.5), #a593c2);*/
+/*}*/

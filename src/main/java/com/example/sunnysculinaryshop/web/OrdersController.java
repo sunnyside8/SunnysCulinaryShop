@@ -41,22 +41,32 @@ public class OrdersController {
         return "redirect:/users/order";
     }
 
-    @PostMapping("/do-order")
+    @PostMapping("/order")
     public String orderDone(@AuthenticationPrincipal ShopUserDetails userDetails){
         userService.clearCartByUserUsername(userDetails.getUsername());
         return "redirect:/done";
     }
 
-    @GetMapping("/clear-cart")
-    public String clearCart(@AuthenticationPrincipal ShopUserDetails userDetails) {
-        userService.clearCartByUserUsername(userDetails.getUsername());
-        return "redirect:/";
-    }
-
-
+//    @GetMapping("/clear-cart")
+//    public String clearCart(@AuthenticationPrincipal ShopUserDetails userDetails) {
+//        userService.clearCartByUserUsername(userDetails.getUsername());
+//        return "redirect:/";
+//    }
 
     @GetMapping("/done")
     public String done(){
         return "done";
     }
+
+
+    @GetMapping("/subscription")
+    public String subscription(){
+        return "subscription";
+    }
+
+    @PostMapping("/subscription")
+    public String addSubscription(){
+        return "redirect:/";
+    }
+
 }
