@@ -1,5 +1,6 @@
 package com.example.sunnysculinaryshop.web;
 
+import com.example.sunnysculinaryshop.model.entity.Meal;
 import com.example.sunnysculinaryshop.model.entity.enums.MealTypeEnum;
 import com.example.sunnysculinaryshop.model.user.ShopUserDetails;
 import com.example.sunnysculinaryshop.service.MealService;
@@ -9,7 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @RequestMapping("/meals")
 @Controller
@@ -42,12 +47,18 @@ public class MealController {
     }
 
 
-    @GetMapping("/add/{id}")
+    @PostMapping("/add/{id}")
     public String addMealToOrder(@PathVariable Long id,
-                                 @AuthenticationPrincipal ShopUserDetails userDetails) {
+                                 @AuthenticationPrincipal ShopUserDetails userDetails,Model model) {
         System.out.println();
+        List<Meal> mealsByUser = userService.getAllMealsByUser(userDetails.getUsername());
+        model.addAttribute("order",mealsByUser);
+        BigDecimal price = mealsByUser.stream().map(Meal::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+        model.addAttribute("totalPrice",price);
+        price = price.add(BigDecimal.TEN);
+        model.addAttribute("totalPriceWithShipping",price);
         userService.addMealToUser(id, userDetails.getUsername());
-        return "redirect:/{id}";
+        return "redirect:/meals/{id}";
     }
 
 

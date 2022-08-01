@@ -38,7 +38,7 @@ public class OrdersController {
     public String removeMeal(@PathVariable Long id, @AuthenticationPrincipal ShopUserDetails userDetails){
         Meal meal = mealService.getMealById(id);
         userService.removeMealFromUser(meal,userDetails.getUsername());
-        return "redirect:/users/order";
+        return "redirect:/order";
     }
 
     @PostMapping("/order")
