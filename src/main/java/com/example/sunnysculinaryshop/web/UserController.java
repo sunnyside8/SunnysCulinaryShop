@@ -5,6 +5,7 @@ import com.example.sunnysculinaryshop.model.binding.AddressBindingModel;
 import com.example.sunnysculinaryshop.model.binding.UserRegisterBindingModel;
 import com.example.sunnysculinaryshop.model.entity.Address;
 import com.example.sunnysculinaryshop.model.entity.Meal;
+import com.example.sunnysculinaryshop.model.service.UserProfileInfo;
 import com.example.sunnysculinaryshop.model.user.ShopUserDetails;
 import com.example.sunnysculinaryshop.service.AddressService;
 import com.example.sunnysculinaryshop.service.MealService;
@@ -48,7 +49,7 @@ public class UserController {
             @Valid AddressBindingModel addressBindingModel,
             BindingResult bindingResult, RedirectAttributes redirectAttributes,
             BindingResult bindingResultAddress, RedirectAttributes redirectAttributesAddress) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
             return "redirect:register";
@@ -70,6 +71,21 @@ public class UserController {
     @GetMapping("/login")
     public String login(Model model){
         return "login";
+    }
+
+
+    @GetMapping ("/profile")
+    public String profile(){
+
+        return "profile";
+    }
+
+    @PostMapping("/profile")
+    public String profileFill(Model model, @AuthenticationPrincipal ShopUserDetails userDetails){
+        model.addAttribute("user",
+                modelMapper.map(userService.getUserByUsername(userDetails.getUsername()), UserProfileInfo.class));
+        model.addAttribute("address",addressService.getAddressStringByUserId(userDetails.getId()));
+        return "profile";
     }
 
 

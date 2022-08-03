@@ -52,17 +52,12 @@
                     <div class="row">
                         <div class="col-md-8">
 
-                            <!--                            <submit type="button" th:method="post" -->
-                            <!--                                    class="btn btn-success float-end"-->
-                            <!--                                    data-bs-toggle="offcanvas" data-bs-target="#shoppingCart"-->
-                            <!--                                    aria-controls="shoppingCart">-->
-                            <!--                                <button> Add to cart</button>-->
-                            <!--                            </submit>-->
 
                             <form class="home-playlist-button" th:action="@{/meals/add/{id}(id= ${meal.getId()})}"
                                   th:method="post">
                                 <button type="submit" name="add" class="btn btn-success float-end">Add</button>
                             </form>
+                            <h5 th:if="${added}">The product has been added</h5>
                             </form>
 
                             </a>
@@ -80,10 +75,9 @@
                 </div>
             </div>
             <div class="p-4 mb-3 mt-2 bg-light rounded border border-primary">
-                <h4>A quote from Bethany</h4>
-                <p class="mb-0 fst-italic">My recipes have been in our family for generations. We hope you enjoy our
-                    pies! -
-                    Bethany
+                <h4>A quote from Sunny</h4>
+                <p class="mb-0 fst-italic">Once you go plant,you will never rant! -
+                    Sunny
                 </p>
             </div>
 

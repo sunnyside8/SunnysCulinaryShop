@@ -69,13 +69,21 @@
                         <ul class="list-unstyled mt-3 mb-4">
                             <li>- 1 main dish</li>
                             <li>Every work day</li>
+                            <li></li>
+                            <li></li>
                         </ul>
-                        <button
-                                type="button"
-                                class="w-100 btn btn-lg btn-outline-primary"
-                        >
-                            Subscribe now
-                        </button>
+                        <form class="home-playlist-button" th:action="@{/subscriptions/Start}"
+                              th:method="post">
+                            <button type="submit" name="add" class="w-100 btn btn-lg btn-outline-primary">Subscribe now</button>
+                        </form>
+<!--                        <button-->
+<!--                                type="button"-->
+<!--                                class="w-100 btn btn-lg btn-outline-primary"-->
+<!--                                th:href="@{/subscriptions/{Start}}"-->
+<!--                               -->
+<!--                        >-->
+<!--                            -->
+<!--                        </button>-->
                     </div>
                 </div>
             </div>
@@ -94,9 +102,10 @@
                             <li>- 1 dessert</li>
                             <li>Every work day</li>
                         </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-primary" >
-                            Subscribe now
-                        </button>
+                        <form class="home-playlist-button" th:action="@{/subscriptions/Extra}"
+                              th:method="post">
+                            <button type="submit" name="add" class="w-100 btn btn-lg btn-outline-primary">Subscribe now</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -117,9 +126,10 @@
                             <li>- 2 desserts(one of them suitable for breakfast)</li>
                             <li>Every work day</li>
                         </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-primary">
-                            Subscribe now
-                        </button>
+                        <form class="home-playlist-button" th:action="@{/subscriptions/Premium}"
+                              th:method="post">
+                            <button type="submit" name="add" class="w-100 btn btn-lg btn-outline-primary">Subscribe now</button>
+                        </form>
                     </div>
                 </div>
             </div>

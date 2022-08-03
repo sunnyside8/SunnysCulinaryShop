@@ -50,14 +50,11 @@ public class MealController {
     @PostMapping("/add/{id}")
     public String addMealToOrder(@PathVariable Long id,
                                  @AuthenticationPrincipal ShopUserDetails userDetails,Model model) {
-        System.out.println();
-        List<Meal> mealsByUser = userService.getAllMealsByUser(userDetails.getUsername());
-        model.addAttribute("order",mealsByUser);
-        BigDecimal price = mealsByUser.stream().map(Meal::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
-        model.addAttribute("totalPrice",price);
-        price = price.add(BigDecimal.TEN);
-        model.addAttribute("totalPriceWithShipping",price);
-        userService.addMealToUser(id, userDetails.getUsername());
+
+        boolean added = userService.addMealToUser(id, userDetails.getUsername());
+        if(added){
+            model.addAttribute("added",true);
+        }
         return "redirect:/meals/{id}";
     }
 

@@ -22,6 +22,8 @@ public class User extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Meal> order;
 
+
+    @Enumerated(EnumType.STRING)
     private SubscriptionEnum subscription;
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -29,6 +31,8 @@ public class User extends BaseEntity {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+
 
     public User() {
     }

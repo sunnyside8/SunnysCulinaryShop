@@ -1,6 +1,7 @@
 package com.example.sunnysculinaryshop.web;
 
 import com.example.sunnysculinaryshop.model.entity.Meal;
+import com.example.sunnysculinaryshop.model.entity.User;
 import com.example.sunnysculinaryshop.model.user.ShopUserDetails;
 import com.example.sunnysculinaryshop.service.MealService;
 import com.example.sunnysculinaryshop.service.UserService;
@@ -25,14 +26,29 @@ public class OrdersController {
 
     @GetMapping("/order")
     public String order(Model model, @AuthenticationPrincipal ShopUserDetails userDetails){
-        List<Meal> mealsByUser = userService.getAllMealsByUser(userDetails.getUsername());
+        User user = userService.getUserByUsername(userDetails.getUsername());
+        List<Meal> mealsByUser = user.getOrder();
         model.addAttribute("order",mealsByUser);
+
         BigDecimal price = mealsByUser.stream().map(Meal::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
         model.addAttribute("totalPrice",price);
+
         price = price.add(BigDecimal.TEN);
         model.addAttribute("totalPriceWithShipping",price);
+
+        model.addAttribute("user",user);
+        model.addAttribute("address",user.getAddress());
+
         return "order";
     }
+
+    @PostMapping("/order")
+    public String postOrder(@AuthenticationPrincipal ShopUserDetails userDetails){
+        userService.clearCartByUserUsername(userDetails.getUsername());
+        return "redirect:/";
+    }
+
+
 
     @GetMapping("remove-meal/{id}")
     public String removeMeal(@PathVariable Long id, @AuthenticationPrincipal ShopUserDetails userDetails){
@@ -41,17 +57,6 @@ public class OrdersController {
         return "redirect:/order";
     }
 
-    @PostMapping("/order")
-    public String orderDone(@AuthenticationPrincipal ShopUserDetails userDetails){
-        userService.clearCartByUserUsername(userDetails.getUsername());
-        return "redirect:/done";
-    }
-
-//    @GetMapping("/clear-cart")
-//    public String clearCart(@AuthenticationPrincipal ShopUserDetails userDetails) {
-//        userService.clearCartByUserUsername(userDetails.getUsername());
-//        return "redirect:/";
-//    }
 
     @GetMapping("/done")
     public String done(){
@@ -59,14 +64,11 @@ public class OrdersController {
     }
 
 
-    @GetMapping("/subscription")
-    public String subscription(){
-        return "subscription";
-    }
 
-    @PostMapping("/subscription")
-    public String addSubscription(){
-        return "redirect:/";
-    }
+    //    @GetMapping("/clear-cart")
+//    public String clearCart(@AuthenticationPrincipal ShopUserDetails userDetails) {
+//        userService.clearCartByUserUsername(userDetails.getUsername());
+//        return "redirect:/";
+//    }
 
 }

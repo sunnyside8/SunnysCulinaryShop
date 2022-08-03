@@ -20,6 +20,8 @@ public class Address extends BaseEntity{
     @Column(nullable = false)
     private String address;
 
+    @OneToOne(mappedBy = "address")
+    private User user;
     public Address() {
     }
 
@@ -47,6 +49,15 @@ public class Address extends BaseEntity{
 
     public Address setAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Address setUser(User user) {
+        this.user = user;
         return this;
     }
 }

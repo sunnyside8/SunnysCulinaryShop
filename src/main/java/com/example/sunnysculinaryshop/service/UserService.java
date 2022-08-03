@@ -6,6 +6,7 @@ import com.example.sunnysculinaryshop.model.entity.Meal;
 import com.example.sunnysculinaryshop.model.entity.Role;
 import com.example.sunnysculinaryshop.model.entity.User;
 import com.example.sunnysculinaryshop.model.entity.enums.RolesNameEnum;
+import com.example.sunnysculinaryshop.model.entity.enums.SubscriptionEnum;
 import com.example.sunnysculinaryshop.model.service.UserServiceModel;
 import com.example.sunnysculinaryshop.repository.RoleRepository;
 import com.example.sunnysculinaryshop.repository.UserRepository;
@@ -88,14 +89,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void addMealToUser(Long id, String username) {
+    public boolean addMealToUser(Long id, String username) {
         User user = this.userRepository.findByUsername(username).get();
         List<Meal> order = user.getOrder();
 
-        order.add(this.mealService.getMealById(id));
+        boolean add = order.add(this.mealService.getMealById(id));
 
         user.setOrder(order);
         userRepository.save(user);
+
+        return add;
 
 
     }
@@ -113,6 +116,12 @@ public class UserService {
         user.setOrder(order);
         userRepository.save(user);
 
+    }
+
+    public void switchTypeOfSubscription(String username, SubscriptionEnum typeOfSubscription) {
+        User user = userRepository.findByUsername(username).get();
+        user.setSubscription(typeOfSubscription);
+        userRepository.save(user);
     }
 }
 
