@@ -1,5 +1,6 @@
 package com.example.sunnysculinaryshop.model.service;
 
+import com.example.sunnysculinaryshop.model.entity.enums.GenderEn;
 import com.example.sunnysculinaryshop.model.entity.enums.SubscriptionEnum;
 
 public class UserProfileInfo {
@@ -8,6 +9,7 @@ public class UserProfileInfo {
     private String email;
     private String password;
     private String fullName;
+    private GenderEn gender;
 
     private SubscriptionEnum subscriptionEnum;
 
@@ -62,6 +64,15 @@ public class UserProfileInfo {
 
     public UserProfileInfo setSubscriptionEnum(SubscriptionEnum subscriptionEnum) {
         this.subscriptionEnum = subscriptionEnum;
+        return this;
+    }
+
+    public GenderEn getGender() {
+        return gender;
+    }
+
+    public UserProfileInfo setGender(GenderEn gender) {
+        this.gender = gender;
         return this;
     }
 }

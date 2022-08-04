@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -34,7 +35,6 @@ public class MealController {
         model.addAttribute("starters", mealService.getAllMealsByType(MealTypeEnum.Starter));
         model.addAttribute("main", mealService.getAllMealsByType(MealTypeEnum.Main));
         model.addAttribute("desserts", mealService.getAllMealsByType(MealTypeEnum.Dessert));
-        System.out.println();
         return "all-meals";
     }
 
@@ -42,20 +42,24 @@ public class MealController {
     @GetMapping("/{id}")
     public String mealPage(@PathVariable Long id, Model model,
                            @AuthenticationPrincipal ShopUserDetails userDetails) {
+        if(model.containsAttribute("added")){
+            model.addAttribute("added",false);
+        }
         model.addAttribute("meal", mealService.getMealFullViewById(id));
         return "meal-page";
     }
 
 
-    @PostMapping("/add/{id}")
+
+    @PostMapping("/{id}")
     public String addMealToOrder(@PathVariable Long id,
-                                 @AuthenticationPrincipal ShopUserDetails userDetails,Model model) {
+                                 @AuthenticationPrincipal ShopUserDetails userDetails, RedirectAttributes redirectAttributes) {
 
         boolean added = userService.addMealToUser(id, userDetails.getUsername());
         if(added){
-            model.addAttribute("added",true);
+           redirectAttributes.addFlashAttribute("added",true);
         }
-        return "redirect:/meals/{id}";
+        return "redirect:/meals/all";
     }
 
 

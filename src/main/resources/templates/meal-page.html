@@ -53,7 +53,7 @@
                         <div class="col-md-8">
 
 
-                            <form class="home-playlist-button" th:action="@{/meals/add/{id}(id= ${meal.getId()})}"
+                            <form class="home-playlist-button" th:action="@{/meals/{id}(id= ${meal.getId()})}"
                                   th:method="post">
                                 <button type="submit" name="add" class="btn btn-success float-end">Add</button>
                             </form>

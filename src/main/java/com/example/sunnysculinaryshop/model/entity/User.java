@@ -1,5 +1,6 @@
 package com.example.sunnysculinaryshop.model.entity;
 
+import com.example.sunnysculinaryshop.model.entity.enums.GenderEn;
 import com.example.sunnysculinaryshop.model.entity.enums.SubscriptionEnum;
 
 import javax.persistence.*;
@@ -25,6 +26,9 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private SubscriptionEnum subscription;
+
+    @Enumerated(EnumType.STRING)
+    private GenderEn gender;
 
     @OneToOne(fetch = FetchType.EAGER)
     private Address address;
@@ -103,6 +107,15 @@ public class User extends BaseEntity {
 
     public User setOrder(List<Meal> order) {
         this.order = order;
+        return this;
+    }
+
+    public GenderEn getGender() {
+        return gender;
+    }
+
+    public User setGender(GenderEn gender) {
+        this.gender = gender;
         return this;
     }
 

@@ -16,14 +16,14 @@ INSERT INTO addresses (id, address,area_city, town)
 VALUES (3,'yl.Studenski bl.1 et.1 ap.4' , 'Sofia',  'Sofia');
 
 #users
-INSERT INTO users (id, email, full_name, password, username, address_id)
-VALUES (1, 'stanislava@gmail.com', 'Stanislava Oncheva', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'sunny', 1);
+INSERT INTO users (id, email, full_name, gender, password, username, address_id)
+VALUES (1, 'stanislava@gmail.com', 'Stanislava Oncheva','Female', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'sunny', 1);
 
-INSERT INTO users (id, email, full_name, password, username, address_id)
-VALUES (2,  'svetlin@gmail.com','Svetlin Kolev', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'perro',2);
+INSERT INTO users (id, email, full_name,gender, password, username, address_id)
+VALUES (2,  'svetlin@gmail.com','Svetlin Kolev','Male' ,'5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'perro',2);
 
-INSERT INTO users (id, email, full_name, password, username,address_id)
-VALUES (3, 'kristina@gmail.com','Kristina Oncheva', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'kristinka',3);
+INSERT INTO users (id, email, full_name, gender, password, username,address_id)
+VALUES (3, 'kristina@gmail.com','Kristina Oncheva','Female', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'kristinka',3);
 
 #ingredients
 INSERT INTO ingredients (id, is_organic, name)
@@ -90,7 +90,7 @@ VALUES (3, 'Main', 'Burger', 9.99,'https://res.cloudinary.com/dksxrlrq3/image/up
 'This flavourful vegan sweet potato burger recipe is packed with delicious spices and is ready to eat in just 30 minutes! Topped with avocado, vegan mayo, red onion, and spicy Kimchi, they are the perfect combination of savoury and spicy.');
 
 INSERT INTO meals (id, meal_type,name,price,photo,description)
-VALUES (4, 'Dessert', 'Cake', 5.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1658343586/134705_iipxid.jpg',
+VALUES (4, 'Dessert', 'Cake', 5.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1659553482/134705_iipxid.jpg',
 'This indulgent, fudgy vegan cake is topped with a rich frosting – you''d never guess that it''s gluten-free and made without dairy, eggs, wheat or nuts');
 
 #meals_allergens

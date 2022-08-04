@@ -84,6 +84,20 @@
                     </div>
                 </div>
 
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select th:field="*{gender}"
+                                    th:errorclass="'is-invalid bg-danger'"
+                                    id="gender" class="form-select">
+                                <option value="" selected>Select gender</option>
+                                <option th:each="l : ${T(com.example.sunnysculinaryshop.model.entity.enums.GenderEn).values()}"
+                                        th:value="${l}" th:text="${l}">Select gender
+                                </option>
+                            </select>
+                        </div>
+
                 <div>
                     <div class="col-auto">
                         <label for="inputPassword" class="col-form-label ">Password</label>

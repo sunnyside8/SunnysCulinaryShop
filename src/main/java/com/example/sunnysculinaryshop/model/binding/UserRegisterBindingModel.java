@@ -1,9 +1,11 @@
 package com.example.sunnysculinaryshop.model.binding;
 
+import com.example.sunnysculinaryshop.model.entity.enums.GenderEn;
 import com.example.sunnysculinaryshop.model.validation.UniqueUserEmail;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserRegisterBindingModel {
@@ -27,6 +29,9 @@ public class UserRegisterBindingModel {
     @NotBlank
     @Size(min = 3,max =20)
     private String confirmPassword;
+
+    @NotNull
+    private GenderEn gender;
 
     public UserRegisterBindingModel() {
     }
@@ -72,6 +77,15 @@ public class UserRegisterBindingModel {
 
     public UserRegisterBindingModel setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+        return this;
+    }
+
+    public GenderEn getGender() {
+        return gender;
+    }
+
+    public UserRegisterBindingModel setGender(GenderEn gender) {
+        this.gender = gender;
         return this;
     }
 }

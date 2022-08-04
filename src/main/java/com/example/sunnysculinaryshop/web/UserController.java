@@ -82,8 +82,8 @@ public class UserController {
 
     @PostMapping("/profile")
     public String profileFill(Model model, @AuthenticationPrincipal ShopUserDetails userDetails){
-        model.addAttribute("user",
-                modelMapper.map(userService.getUserByUsername(userDetails.getUsername()), UserProfileInfo.class));
+        UserProfileInfo map = modelMapper.map(userService.getUserByUsername(userDetails.getUsername()), UserProfileInfo.class);
+        model.addAttribute("user",map);
         model.addAttribute("address",addressService.getAddressStringByUserId(userDetails.getId()));
         return "profile";
     }
