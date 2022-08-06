@@ -55,25 +55,6 @@
                                     </div>
 
                                 </div>
-                                <div class="nav-item dropdown float-right" sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <a
-                                            class="nav-link dropdown-toggle"
-                                            href="#"
-                                            id="nav-dropdown-admin"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                    >
-                                        Admin Panel
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="nav-dropdown">
-                                        <li>
-                                            <a class="dropdown-item" th:href="@{/meals/starters}">All orders</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" th:href="@{/meals/mains}">Add meal</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>

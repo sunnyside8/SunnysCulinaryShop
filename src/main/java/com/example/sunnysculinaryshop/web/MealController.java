@@ -31,7 +31,7 @@ public class MealController {
 
 
     @GetMapping("/all")
-    public String mealPage(Model model) {
+    public String allMealsPage(Model model) {
         model.addAttribute("starters", mealService.getAllMealsByType(MealTypeEnum.Starter));
         model.addAttribute("main", mealService.getAllMealsByType(MealTypeEnum.Main));
         model.addAttribute("desserts", mealService.getAllMealsByType(MealTypeEnum.Dessert));
@@ -42,9 +42,6 @@ public class MealController {
     @GetMapping("/{id}")
     public String mealPage(@PathVariable Long id, Model model,
                            @AuthenticationPrincipal ShopUserDetails userDetails) {
-        if(model.containsAttribute("added")){
-            model.addAttribute("added",false);
-        }
         model.addAttribute("meal", mealService.getMealFullViewById(id));
         return "meal-page";
     }
@@ -56,9 +53,6 @@ public class MealController {
                                  @AuthenticationPrincipal ShopUserDetails userDetails, RedirectAttributes redirectAttributes) {
 
         boolean added = userService.addMealToUser(id, userDetails.getUsername());
-        if(added){
-           redirectAttributes.addFlashAttribute("added",true);
-        }
         return "redirect:/meals/all";
     }
 
@@ -81,6 +75,11 @@ public class MealController {
     public String mainsPage(Model model) {
         model.addAttribute("mains", mealService.getAllMealsByType(MealTypeEnum.Main));
         return "mains";
+    }
+
+    @GetMapping("/add")
+    public String addMeal(){
+        return "add-meal";
     }
 
 

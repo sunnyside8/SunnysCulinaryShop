@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.math.BigDecimal;
 import java.util.List;
+
 @Controller
 public class OrdersController {
-        private final UserService userService;
-        private final MealService mealService;
+    private final UserService userService;
+    private final MealService mealService;
 
     public OrdersController(UserService userService, MealService mealService) {
         this.userService = userService;
@@ -25,50 +26,38 @@ public class OrdersController {
     }
 
     @GetMapping("/order")
-    public String order(Model model, @AuthenticationPrincipal ShopUserDetails userDetails){
+    public String order(Model model, @AuthenticationPrincipal ShopUserDetails userDetails) {
         User user = userService.getUserByUsername(userDetails.getUsername());
         List<Meal> mealsByUser = user.getOrder();
-        model.addAttribute("order",mealsByUser);
+        model.addAttribute("order", mealsByUser);
 
         BigDecimal price = mealsByUser.stream().map(Meal::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
-        model.addAttribute("totalPrice",price);
+        model.addAttribute("totalPrice", price);
 
         price = price.add(BigDecimal.TEN);
-        model.addAttribute("totalPriceWithShipping",price);
+        model.addAttribute("totalPriceWithShipping", price);
 
-        model.addAttribute("user",user);
-        model.addAttribute("address",user.getAddress());
+        model.addAttribute("user", user);
+        model.addAttribute("address", user.getAddress());
 
         return "order";
     }
 
     @PostMapping("/order")
-    public String postOrder(@AuthenticationPrincipal ShopUserDetails userDetails){
+    public String postOrder(@AuthenticationPrincipal ShopUserDetails userDetails) {
         userService.clearCartByUserUsername(userDetails.getUsername());
-        return "redirect:/";
+        return "redirect:/done";
     }
+
 
 
 
     @GetMapping("remove-meal/{id}")
-    public String removeMeal(@PathVariable Long id, @AuthenticationPrincipal ShopUserDetails userDetails){
+    public String removeMeal(@PathVariable Long id, @AuthenticationPrincipal ShopUserDetails userDetails) {
         Meal meal = mealService.getMealById(id);
-        userService.removeMealFromUser(meal,userDetails.getUsername());
+        userService.removeMealFromUser(meal, userDetails.getUsername());
         return "redirect:/order";
     }
 
-
-    @GetMapping("/done")
-    public String done(){
-        return "done";
-    }
-
-
-
-    //    @GetMapping("/clear-cart")
-//    public String clearCart(@AuthenticationPrincipal ShopUserDetails userDetails) {
-//        userService.clearCartByUserUsername(userDetails.getUsername());
-//        return "redirect:/";
-//    }
 
 }

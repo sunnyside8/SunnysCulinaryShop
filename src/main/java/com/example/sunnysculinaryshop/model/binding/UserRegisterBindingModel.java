@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 public class UserRegisterBindingModel {
 
     @NotBlank
-    @Size(min = 3,max =20)
+    @Size(min = 3,max =30)
     private String username;
 
     @Email
@@ -19,15 +19,15 @@ public class UserRegisterBindingModel {
     private String email;
 
     @NotBlank
-    @Size(min = 3,max =20)
+    @Size(min = 5,max =20)
     private String password;
 
     @NotBlank
-    @Size(min = 3,max = 20)
+    @Size(min = 3,max = 50)
     private String fullName;
 
     @NotBlank
-    @Size(min = 3,max =20)
+    @Size(min = 5,max =20)
     private String confirmPassword;
 
     @NotNull

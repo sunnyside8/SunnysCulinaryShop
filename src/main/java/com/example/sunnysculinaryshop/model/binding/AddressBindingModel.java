@@ -17,7 +17,7 @@ public class AddressBindingModel {
 
 
     @NotBlank
-    @Size(min = 3,max =50)
+    @Size(min = 5,max =100)
     private String address;
 
     public AddressBindingModel() {

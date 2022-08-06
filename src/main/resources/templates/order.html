@@ -27,7 +27,7 @@
 
 
         <div class="row">
-            <table class="table  table-bordered table-hover" style="background-color: white">
+            <table class="table  table-bordered table-hover" style="background-color: white" th:if="${!order.isEmpty()}" >
                 <thead>
                 <tr>
                     <th>Meal name</th>
@@ -52,7 +52,8 @@
                     <td class="col" style="text-align: center">
                         <input type="number" class="form-control" value="1">
                     </td>
-                    <td class="col text-center" th:text="${m.getPrice()}  + ' BGN' "><strong>$14.95</strong></td>
+                </th:block>
+                    <td class="col text-center" th:text="${m.getPrice()}  + ' BGN' "><strong></strong></td>
 
                     <td class="col">
                         <button type="button" class="btn btn-danger">
@@ -211,7 +212,6 @@
                         <small class="text-muted"
                         >Full name as displayed on card</small
                         >
-                        <div class="invalid-feedback">Name on card is required</div>
                     </div>
 
                     <div class="form-floating col-md-6">
@@ -223,9 +223,6 @@
 
                         />
                         <label for="cc-number">Credit card number</label>
-                        <div class="invalid-feedback">
-                            Credit card number is required
-                        </div>
                     </div>
 
                     <div class="form-floating col-md-3">
@@ -237,7 +234,6 @@
 
                         />
                         <label for="cc-expiration">Expiration</label>
-                        <div class="invalid-feedback">Expiration date required</div>
                     </div>
 
                     <div class="form-floating col-md-3">
@@ -249,13 +245,12 @@
 
                         />
                         <label for="cc-cvv">CVV</label>
-                        <div class="invalid-feedback">Security code required</div>
                     </div>
                 </div>
 
                 <hr class="my-4"/>
 
-                <form class="home-playlist-button" th:action="@{/order}"
+                <form class="home-playlist-button" th:action="@{/order-cart}"
                       th:method="post">
                     <button type="submit" name="add" class="btn btn-success float-end">Place order</button>
                 </form>

@@ -18,12 +18,10 @@ public class AddressService {
 
     public Address addNewAddress(AddressBindingModel addressBindingModel) {
         Address address = modelMapper.map(addressBindingModel,Address.class);
-        System.out.println();
         return addressRepository.save(address);
     }
 
     public Address getAddressStringByUserId(Long id) {
-        Address addressByUser_username = addressRepository.getByUser_Id(id);
-        return addressByUser_username;
+        return addressRepository.getByUser_Id(id);
     }
 }

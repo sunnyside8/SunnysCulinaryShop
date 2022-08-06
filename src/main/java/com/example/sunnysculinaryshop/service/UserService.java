@@ -93,13 +93,13 @@ public class UserService {
         User user = this.userRepository.findByUsername(username).get();
         List<Meal> order = user.getOrder();
 
-        boolean add = order.add(this.mealService.getMealById(id));
+        Meal meal = this.mealService.getMealById(id);
+        boolean add = order.add(meal);
 
         user.setOrder(order);
         userRepository.save(user);
 
         return add;
-
 
     }
 
@@ -112,7 +112,9 @@ public class UserService {
     public void removeMealFromUser(Meal meal, String username) {
         User user = userRepository.findByUsername(username).get();
         List<Meal> order = user.getOrder();
+
         order.remove(meal);
+
         user.setOrder(order);
         userRepository.save(user);
 

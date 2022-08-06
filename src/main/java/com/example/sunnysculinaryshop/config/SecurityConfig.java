@@ -37,6 +37,7 @@ public class SecurityConfig {
                 // everyone can login and register
                         antMatchers("/", "/users/login", "/users/register").permitAll().
                         antMatchers("/meals/**").permitAll().
+                antMatchers("/contacts").permitAll().
                 // all other pages are available for logger in users
                         anyRequest().
                 authenticated().

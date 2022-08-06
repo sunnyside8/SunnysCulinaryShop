@@ -90,7 +90,6 @@ public class UserController {
 
 
 
-
     @ModelAttribute
     public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
