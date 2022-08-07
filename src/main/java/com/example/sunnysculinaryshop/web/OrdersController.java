@@ -49,6 +49,10 @@ public class OrdersController {
         return "redirect:/done";
     }
 
+    @GetMapping("/done")
+    public String done(){
+        return "done";
+    }
 
 
 
