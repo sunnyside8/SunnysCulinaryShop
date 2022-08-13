@@ -43,7 +43,7 @@ public class OrdersController {
         return "order";
     }
 
-    @PostMapping("/order")
+    @PostMapping("/order-cart")
     public String postOrder(@AuthenticationPrincipal ShopUserDetails userDetails) {
         userService.clearCartByUserUsername(userDetails.getUsername());
         return "redirect:/done";

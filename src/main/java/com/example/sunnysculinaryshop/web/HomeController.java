@@ -21,17 +21,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model){
-        model.addAttribute("randomMeals", getThreeRandomMealsEveryWorkDay());
+        model.addAttribute("randomMeals", mealService.getThreeRandomMeals());
         System.out.println();
         return "index";
     }
-
-   // @Scheduled(cron = "43 3 * * * *")
-    @Scheduled(fixedDelay = 1000)
-    private Set<Meal> getThreeRandomMealsEveryWorkDay() {
-        return mealService.getThreeRandomMeals();
-    }
-
 
 }
 

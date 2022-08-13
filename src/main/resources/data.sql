@@ -25,6 +25,18 @@ VALUES (2,  'svetlin@gmail.com','Svetlin Kolev','Male' ,'5c81772c076638d0427b784
 INSERT INTO users (id, email, full_name, gender, password, username,address_id)
 VALUES (3, 'kristina@gmail.com','Kristina Oncheva','Female', '5c81772c076638d0427b78498a47ec160fd411806ac9ea6927233e534a74b68a3d0008a2a4012b0f', 'kristinka',3);
 
+INSERT INTO users_roles(user_id,roles_id)
+VALUES (1,1);
+
+INSERT INTO users_roles(user_id,roles_id)
+VALUES (1,3);
+
+INSERT INTO users_roles(user_id,roles_id)
+VALUES (2,3);
+
+INSERT INTO users_roles(user_id,roles_id)
+VALUES (3,3);
+
 #ingredients
 INSERT INTO ingredients (id, is_organic, name)
 VALUES (1, true, 'Rice');
@@ -55,6 +67,12 @@ VALUES (9, false, 'Fresh Veggies');
 
 INSERT INTO ingredients (id, is_organic, name)
 VALUES (10, false, 'Fruit');
+
+INSERT INTO ingredients (id, is_organic, name)
+VALUES (11, false, 'Dough');
+
+INSERT INTO ingredients (id, is_organic, name)
+VALUES (12, true, 'Tomato Souse');
 
 #allergens
 INSERT INTO allergens (id, allergen, picture)
@@ -93,6 +111,18 @@ INSERT INTO meals (id, meal_type,name,price,photo,description)
 VALUES (4, 'Dessert', 'Cake', 5.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1659553482/134705_iipxid.jpg',
 'This indulgent, fudgy vegan cake is topped with a rich frosting – you''d never guess that it''s gluten-free and made without dairy, eggs, wheat or nuts');
 
+INSERT INTO meals (id, meal_type,name,price,photo,description)
+VALUES (5, 'Starter', 'Colorful Salad', 6.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1660370886/Vegan-Salad-Meal-Prep-Idea-1-1_aakxjs.jpg',
+        'Meal prepping this vegan salad is super easy and perfect to grab and go for a busy day at school or work.All you need to do to make this vegan salad is cook the soy curls, and layer the salad in, mix the pico de gallo and serve with dressing on the side. ')
+
+INSERT INTO meals (id, meal_type,name,price,photo,description)
+VALUES (6, 'Main', 'Pizza', 9.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1660371132/vegan_pizza_26503_16x9_gipwuf.jpg',
+    'Homemade pizza is a great way to get the kids involved with dinner. These two vegan toppings are a good starting point, but feel free to experiment with your own.')
+
+INSERT INTO meals (id, meal_type,name,price,photo,description)
+VALUES (7, 'Dessert', 'Coconut Milk Panna Cotta', 5.99,'https://res.cloudinary.com/dksxrlrq3/image/upload/v1660371402/Coconut-milk-Panna-cotta-with-blueberries-and-thyme-vegan-desserts-scaled_cr3upk.jpg',
+    'We know vegan desserts can have a reputation for being less than stellar. But, after perfecting dishes like our Vegan Chocolate Silk Pie, Apple Pear Galette, and Dairy-Free Pumpkin Cheesecake, we have changed our tune to appreciate the goodness of plant-based desserts. Our latest creation is a creamy vegan coconut milk panna cotta. It features a special flavor combination that elevates a dessert that is already delicious on its own.')
+
 #meals_allergens
 INSERT INTO meals_allergens (meal_id,allergens_id)
 VALUES (1, 5);
@@ -114,6 +144,21 @@ VALUES (3, 5);
 
 INSERT INTO meals_allergens (meal_id,allergens_id)
 VALUES (4, 4);
+
+INSERT INTO meals_allergens (meal_id,allergens_id)
+VALUES (5, 5);
+
+INSERT INTO meals_allergens (meal_id,allergens_id)
+VALUES (5, 6);
+
+INSERT INTO meals_allergens (meal_id,allergens_id)
+VALUES (6, 1);
+
+INSERT INTO meals_allergens (meal_id,allergens_id)
+VALUES (6, 5);
+
+INSERT INTO meals_allergens (meal_id,allergens_id)
+VALUES (7, 4);
 
 #meals_ingredients
 INSERT INTO meals_ingredients (meal_id,ingredients_id)
@@ -142,3 +187,27 @@ VALUES (4, 5);
 
 INSERT INTO meals_ingredients (meal_id,ingredients_id)
 VALUES (4, 10);
+
+INSERT INTO meals_ingredients (meal_id,ingredients_id)
+VALUES (5, 3);
+
+INSERT INTO meals_ingredients (meal_id,ingredients_id)
+VALUES (5, 9);
+
+INSERT INTO meals_ingredients (meal_id,ingredients_id)
+VALUES (6, 10);
+
+INSERT INTO meals_ingredients (meal_id,ingredients_id)
+VALUES (6, 11);
+
+INSERT INTO meals_ingredients (meal_id,ingredients_id)
+VALUES (6, 8);
+
+INSERT INTO meals_ingredients (meal_id,ingredients_id)
+VALUES (7, 4);
+
+INSERT INTO meals_ingredients (meal_id,ingredients_id)
+VALUES (7, 5);
+
+INSERT INTO meals_ingredients (meal_id,ingredients_id)
+VALUES (7, 1);

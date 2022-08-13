@@ -56,8 +56,7 @@ public class MealService {
     }
 
     public MealFullViewModel getMealFullViewById(Long id) {
-        MealFullViewModel mealFullViewModel = modelMapper.map(getMealById(id), MealFullViewModel.class);
-        return mealFullViewModel;
+        return modelMapper.map(getMealById(id), MealFullViewModel.class);
     }
 
 

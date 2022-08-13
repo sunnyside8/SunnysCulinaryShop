@@ -50,9 +50,10 @@ public class MealController {
 
     @PostMapping("/{id}")
     public String addMealToOrder(@PathVariable Long id,
-                                 @AuthenticationPrincipal ShopUserDetails userDetails, RedirectAttributes redirectAttributes) {
+                                 @AuthenticationPrincipal ShopUserDetails userDetails) {
 
         boolean added = userService.addMealToUser(id, userDetails.getUsername());
+
         return "redirect:/meals/all";
     }
 

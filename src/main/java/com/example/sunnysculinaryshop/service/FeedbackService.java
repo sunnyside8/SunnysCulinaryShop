@@ -17,7 +17,7 @@ public class FeedbackService {
         this.modelMapper = modelMapper;
     }
 
-    public void saveFeedback(FeedbackBindingModel feedbackBindingModel) {
-       feedbackRepository.save(modelMapper.map(feedbackBindingModel, Feedback.class));
+    public Feedback saveFeedback(FeedbackBindingModel feedbackBindingModel) {
+       return  feedbackRepository.save(modelMapper.map(feedbackBindingModel, Feedback.class));
     }
 }

@@ -73,7 +73,6 @@ public class UserController {
         return "login";
     }
 
-
     @GetMapping ("/profile")
     public String profile(){
 
@@ -89,7 +88,6 @@ public class UserController {
     }
 
 
-
     @ModelAttribute
     public UserRegisterBindingModel userRegisterBindingModel() {
         return new UserRegisterBindingModel();
@@ -99,5 +97,20 @@ public class UserController {
     public AddressBindingModel addressBindingModel() {
         return new AddressBindingModel();
     }
+
+
+    //    @GetMapping("/update")
+//    public String changeProfile(@AuthenticationPrincipal ShopUserDetails userDetails,Model model){
+//        model.addAttribute("user",
+//                modelMapper.map(userService.getUserByUsername(userDetails.getUsername()),UserProfileInfo.class));
+//        return "profile-edit";
+//    }
+//
+//    @PatchMapping("/update")
+//    public String updateConfirm(Model model){
+//        model.addAttribute("changedName",);
+//
+//        return "redirect:/users/profile";
+//    }
 
 }

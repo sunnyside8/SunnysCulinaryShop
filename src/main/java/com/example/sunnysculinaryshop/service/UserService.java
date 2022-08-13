@@ -55,9 +55,6 @@ public class UserService {
 
     }
 
-    public UserServiceModel findByUsername(String username) {
-        return modelMapper.map(getUserByUsername(username), UserServiceModel.class);
-    }
 
     public User getUserByUsername(String username){
         return  this.userRepository.findByUsername(username).orElse(null);
@@ -85,21 +82,19 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     public boolean addMealToUser(Long id, String username) {
         User user = this.userRepository.findByUsername(username).get();
-        List<Meal> order = user.getOrder();
 
         Meal meal = this.mealService.getMealById(id);
-        boolean add = order.add(meal);
 
-        user.setOrder(order);
+        user.getOrder().add(meal);
         userRepository.save(user);
 
-        return add;
+        return true;
 
     }
 
@@ -109,14 +104,16 @@ public class UserService {
     }
 
 
-    public void removeMealFromUser(Meal meal, String username) {
+    public boolean removeMealFromUser(Meal meal, String username) {
         User user = userRepository.findByUsername(username).get();
         List<Meal> order = user.getOrder();
 
-        order.remove(meal);
+        boolean remove = order.remove(meal);
 
         user.setOrder(order);
         userRepository.save(user);
+
+        return remove;
 
     }
 
